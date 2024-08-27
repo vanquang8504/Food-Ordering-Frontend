@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUI-like Multiple Select with Dropdown Animation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    /* Container cho select */
+    .select-container {
+      position: relative;
+      margin: 20px 0;
+      width: 300px;
+    }
+
+    /* Nút hiển thị dropdown */
+    .select-button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #bdbdbd;
+      border-radius: 4px;
+      background: white;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Mũi tên xuống */
+    .select-button::after {
+      content: '';
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid #333;
+      position: absolute;
+      right: 12px;
+    }
+
+    /* Dropdown menu */
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border: 1px solid #bdbdbd;
+      border-radius: 4px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-height: 200px;
+      overflow-y: auto;
+      opacity: 0;
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 1;
+    }
+
+    /* Hiển thị dropdown khi người dùng nhấn vào nút */
+    .dropdown-menu.show {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+
+    /* Menu item */
+    .dropdown-menu label {
+      display: block;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .dropdown-menu input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    /* Hover và focus */
+    .dropdown-menu label:hover {
+      background-color: #f1f1f1;
+    }
+
+    .dropdown-menu input[type="checkbox"]:checked + label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="select-container">
+  <div class="select-button" id="dropdownButton">Select Names</div>
+  <div class="dropdown-menu" id="dropdownMenu">
+    <div>
+      <input type="checkbox" id="name1" value="Oliver Hansen">
+      <label for="name1">Oliver Hansen</label>
+    </div>
+    <div>
+      <input type="checkbox" id="name2" value="Van Henry">
+      <label for="name2">Van Henry</label>
+    </div>
+    <div>
+      <input type="checkbox" id="name3" value="April Tucker">
+      <label for="name3">April Tucker</label>
+    </div>
+    <div>
+      <input type="checkbox" id="name4" value="Ralph Hubbard">
+      <label for="name4">Ralph Hubbard</label>
+    </div>
+    <div>
+      <input type="checkbox" id="name5" value="Omar Alexander">
+      <label for="name5">Omar Alexander</label>
+    </div>
+    <div>
+      <input type="checkbox" id="name6" value="Carlos Abbott">
+      <label for="name6">Carlos Abbott</label>
+    </div>
+    <div>
+      <input type="checkbox" id="name7" value="Miriam Wagner">
+      <label for="name7">Miriam Wagner</label>
+    </div>
+    <div>
+      <input type="checkbox" id="name8" value="Bradley Wilkerson">
+      <label for="name8">Bradley Wilkerson</label>
+    </div>
+    <div>
+      <input type="checkbox" id="name9" value="Virginia Andrews">
+      <label for="name9">Virginia Andrews</label>
+    </div>
+    <div>
+      <input type="checkbox" id="name10" value="Kelly Snyder">
+      <label for="name10">Kelly Snyder</label>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Hiển thị hoặc ẩn dropdown menu
+  const dropdownButton = document.getElementById('dropdownButton');
+  const dropdownMenu = document.getElementById('dropdownMenu');
+  
+  dropdownButton.addEventListener('click', function() {
+    dropdownMenu.classList.toggle('show');
+  });
+
+  // Lấy các giá trị đã chọn và hiển thị trên nút
+  const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
+  
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      const selected = Array.from(checkboxes)
+        .filter(i => i.checked)
+        .map(i => i.value);
+        
+      dropdownButton.textContent = selected.length > 0 ? selected.join(', ') : 'Select Names';
+    });
+  });
+
+  // Đóng dropdown khi nhấp ra ngoài
+  document.addEventListener('click', function(event) {
+    if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+      dropdownMenu.classList.remove('show');
+    }
+  });
+</script>
+
+</body>
+</html>

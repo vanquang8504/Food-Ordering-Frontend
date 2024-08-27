@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUI-like TextField</title>
+  <style>
+    /* Container cho TextField */
+    .textfield-container {
+      position: relative;
+      margin: 20px 0;
+    }
+
+    /* Input cơ bản */
+    .textfield-container input {
+      width: 100%;
+      padding: 16px 12px 8px 12px;
+      font-size: 16px;
+      border: 1px solid #bdbdbd;
+      border-radius: 4px;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+
+    /* Nhãn cho TextField */
+    .textfield-container label {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      background: white;
+      padding: 0 4px;
+      color: #9e9e9e;
+      font-size: 16px;
+      transition: all 0.2s ease;
+      pointer-events: none;
+    }
+
+    /* Khi input có focus, thay đổi border và chuyển nhãn lên trên */
+    .textfield-container input:focus {
+      border-color: #3f51b5;
+      outline: none;
+    }
+
+    .textfield-container input:focus + label,
+    .textfield-container input:not(:placeholder-shown) + label {
+      top: 0;
+      transform: translateY(-50%) scale(0.85);
+      color: #3f51b5;
+    }
+
+    /* Hiệu ứng hover */
+    .textfield-container input:hover {
+      border-color: red;
+    }
+
+    
+  </style>
+</head>
+<body>
+
+<div class="textfield-container">
+  <input type="text" id="name" name="name" placeholder=" " required>
+  <label for="name">Name</label>
+</div>
+
+
+</body>
+</html>
